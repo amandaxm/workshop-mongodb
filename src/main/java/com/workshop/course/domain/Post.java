@@ -1,12 +1,16 @@
 package com.workshop.course.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.workshop.course.dto.AuthorDTO;
+import com.workshop.course.dto.CommentDTO;
+
 @Document
 public class Post implements Serializable {
 	/**
@@ -19,14 +23,20 @@ public class Post implements Serializable {
 	private String title;
 	private String body;
 	private AuthorDTO author;
-	public Post() {}
+	private List<CommentDTO> comments = new ArrayList<>();
+	
+	
 
-	public Post(String id, Date date, String title, String body, AuthorDTO author) {		super();
+	public Post() {
+	}
+
+	public Post(String id, Date date, String title, String body, AuthorDTO author) {
+		super();
 		this.id = id;
 		this.date = date;
 		this.title = title;
 		this.body = body;
-		this.author =author;
+		this.author = author;
 	}
 
 	public String getId() {
@@ -60,6 +70,7 @@ public class Post implements Serializable {
 	public void setBody(String body) {
 		this.body = body;
 	}
+
 	public AuthorDTO getAuthor() {
 		return author;
 	}
@@ -67,7 +78,6 @@ public class Post implements Serializable {
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
 	}
-	
 
 	@Override
 	public int hashCode() {
@@ -94,5 +104,12 @@ public class Post implements Serializable {
 		return true;
 	}
 
-	
+	public List<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentDTO> comments) {
+		this.comments = comments;
+	}
+
 }
