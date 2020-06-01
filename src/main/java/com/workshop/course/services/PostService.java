@@ -1,5 +1,6 @@
 package com.workshop.course.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,20 @@ public class PostService {
 
 		Optional<Post> user = repo.findById(id);
 
-		if(user == null) {
+		if (user == null) {
 
 			throw new ObjectNotFoundException("Objeto não encontrado");
 
-			}
+		}
 
-			return user;
-
-			   }
-
+		return user;
 
 	}
 
+	public List<Post> findByTitle(String text) {
+
+		return repo.findByTitleContainingIgnoreCase(text);
+
+	}
+
+}
